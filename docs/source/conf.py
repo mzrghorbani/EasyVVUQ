@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 from sphinx.ext.apidoc import main as apidoc_main
 apidoc_main(["--force", "-o", "./_autodoc", "../../easyvvuq"])
 
-autodoc_mock_imports = ['dill', 'SALib']
+autodoc_mock_imports = ['dill', 'SALib', 'cerberus', 'chaospy', 'scipy', 'qcg', 'kubernetes', 'dask', 'sqlalchemy', 'numpoly', 'sklearn']
 
 # -- Project information -----------------------------------------------------
 
