@@ -339,7 +339,7 @@ class EnsembleBootMultiple(BaseAnalysisElement):
 
     def element_name(self):
         """Name for this element for logging purposes"""
-        return "ensemble_boot"
+        return "ensemble_boot_multiple"
 
     def element_version(self):
         """Version of this element for logging purposes"""
