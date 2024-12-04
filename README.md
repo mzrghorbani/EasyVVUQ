@@ -34,6 +34,8 @@ Available analysis and sampling methods:
 
 * Polynomial Chaos Expansion
 * Stochastic Collocation
+* Dimension-adaptive Stochastic Collocation for high-dimensional inputs (incl notebook in `./tutorials` and [theoretical tutorial](https://www.researchgate.net/publication/359296270_Adaptive_sparse-grid_tutorial))
+* Simplex Stochastic Collocation for irregular outputs (incl notebook in `./tutorials` and [article](https://doi.org/10.1016/J.JCP.2015.12.034))
 * Monte Carlo Sensitivity Analysis
 * Markov-Chain Monte Carlo
 
@@ -87,16 +89,11 @@ git clone https://github.com/UCL-CCS/EasyVVUQ.git
 
 Note: As above, you need to be sure you are installing for Python 3 - if necessary replace `pip` with `pip3` and `python` with `python3` in the commands below.
 
-We are trying to keep dependencies at a minimum but a few are inevitable, to install them use:
+We are trying to keep dependencies at a minimum but a few are inevitable, to install these, install the EasyVVUQ library itself and build a test case use:
 ```
 cd EasyVVUQ/
 
-pip install --use-feature=2020-resolver -r requirements.txt
-```
-
-Then the library can be installed using:
-```buildoutcfg
-python setup.py install
+bash install_EasyVVUQ.sh
 ```
 
 ## API

@@ -51,6 +51,24 @@ class AnalysisResults:
         """
         raise NotImplementedError('descriptive statistics not available in this method')
 
+    def _get_derivatives_first(self, qoi, input_):
+        """Returns the first order derivative-based index for a given qoi wrt input variable.
+
+        Parameters
+        ----------
+        qoi : str
+           Quantity of interest
+        input_ : str
+           Input variable
+
+        Returns
+        -------
+        float
+            First order derivative-based index.
+        """
+        raise NotImplementedError
+
+
     def _get_sobols_first(self, qoi, input_):
         """Returns first order Sobol indices.
 
@@ -167,7 +185,7 @@ class AnalysisResults:
         -------
         dict or array
         """
-        assert(not ((qoi is None) and (input_ is not None)))
+        assert (not ((qoi is None) and (input_ is not None)))
         if (qoi is not None) and (qoi not in self.qois):
             raise RuntimeError('no such qoi in this analysis')
         if (input_ is not None) and (input_ not in self.inputs):
@@ -186,6 +204,38 @@ class AnalysisResults:
         except NotImplementedError:
             raise RuntimeError(
                 'this kind of sobol index reporting not implemented in this analysis method')
+
+    def derivatives_first(self, qoi=None, input_=None):
+        """Return first order derivative-based sensitivity indices.
+
+        Parameters
+        ----------
+        qoi: str or tuple
+            The name of the quantity of interest or None.
+            Use a tuple of the form (qoi, index) where index is integer
+            that means the coordinate index of a vector qoi.
+
+        input_: str
+            The name of the input parameter or None.
+
+        Examples
+        --------
+        >>> results.derivatives_first()
+        {'f': {'x1': array([0.610242]), 'x2': array([0.26096511])}}
+        >>> results.derivatives_first('f')
+        {'x1': array([0.610242]), 'x2': array([0.26096511])}
+        >>> results.derivatives_first('f', 'x1')
+        array([0.610242])
+        >>> results_vectors.derivatives_first(('g', 2))
+        {'x1': array([0.5]), 'x2': array([0.5])}
+
+        Returns
+        -------
+        dict or array
+           If both qoi and input_ are specified will return a dictionary,
+           otherwise will return an array.
+        """
+        return self._get_sobols_general(self._get_derivatives_first, qoi, input_)
 
     def sobols_first(self, qoi=None, input_=None):
         """Return first order sensitivity indices.
@@ -349,7 +399,7 @@ class AnalysisResults:
             an array with the values for that statistic. Otherwise will return a DataFrame
             with more data.
         """
-        assert(not ((qoi is None) and (statistic is not None)))
+        assert (not ((qoi is None) and (statistic is not None)))
         statistics = ['mean', 'var', 'std', '1%', '10%', '90%', '99%', 'min', 'max', 'median']
         qois = self.qois
         if qoi is not None:
@@ -361,7 +411,7 @@ class AnalysisResults:
             for statistic_ in statistics:
                 try:
                     value = self._describe(qoi, statistic_)
-                    assert(isinstance(value, np.ndarray))
+                    assert (isinstance(value, np.ndarray))
                     for i, x in enumerate(value):
                         try:
                             result[(qoi, i)][statistic_] = x
