@@ -52,6 +52,8 @@ class MCSampler(RandomSampler, sampler_name='mc_sampler'):
         super().__init__(vary=vary, count=0, max_num=n_mc_samples, **kwargs)
         # the number of uncertain inputs
         self.n_params = len(vary)
+        # List of the probability distributions of uncertain parameters
+        self.params_distribution = list(vary.values())
         # the number of MC samples, for each of the n_params + 2 input matrices
         self.n_mc_samples = n_mc_samples
         # joint distribution
@@ -67,7 +69,12 @@ class MCSampler(RandomSampler, sampler_name='mc_sampler'):
 
         run_dict = {}
         for idx, param_name in enumerate(self.vary.get_keys()):
-            run_dict[param_name] = self.xi_mc[self.count][idx]
+            current_param = self.xi_mc[self.count][idx]
+            if isinstance(self.params_distribution[idx], cp.DiscreteUniform):
+                current_param = int(current_param)
+            run_dict[param_name] = current_param
+
+
         self.count += 1
 
         return run_dict
