@@ -10,7 +10,9 @@ to create input files for the simulations.
 from .base import BaseSamplingElement, Vary
 from .random import RandomSampler
 from .stochastic_collocation import SCSampler
+from .simplex_stochastic_collocation import SSCSampler
 from .pce import PCESampler
+from .fd import FDSampler
 from .qmc import QMCSampler
 from .mcmc import MCMCSampler
 from .sweep import BasicSweep
@@ -21,6 +23,8 @@ from .replica_sampler import ReplicaSampler
 from .mc_sampler import MCSampler
 from .csv_sampler import CSVSampler
 from .dataframe_sampler import DataFrameSampler
+from .grid_sampler import Grid_Sampler
+from .transformations import Transformations
 
 __copyright__ = """
 

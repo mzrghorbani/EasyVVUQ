@@ -1,6 +1,8 @@
 from .simple_csv import SimpleCSV
+from .robust_csv import RobustCSV
 from .json import JSONDecoder
 from .yaml import YAMLDecoder
+from .hdf5 import HDF5
 
 __copyright__ = """
 

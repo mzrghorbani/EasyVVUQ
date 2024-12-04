@@ -4,8 +4,6 @@ import chaospy as cp
 import os
 import logging
 import pytest
-import shutil
-from easyvvuq.db.sql import CampaignTable
 
 TEST_PATH = os.path.dirname(os.path.realpath(__file__))
 LOGGER = logging.getLogger(__name__)
@@ -77,8 +75,8 @@ def campaign(tmpdir):
 
 def test_campaign_exists(tmp_path):
     campaign = uq.Campaign(name='test', work_dir=tmp_path)
-    assert(campaign.campaign_db.campaign_exists('test'))
-    assert(not campaign.campaign_db.campaign_exists('test2'))
+    assert (campaign.campaign_db.campaign_exists('test'))
+    assert (not campaign.campaign_db.campaign_exists('test2'))
 
 
 def test_invalid_sampler(tmp_path):

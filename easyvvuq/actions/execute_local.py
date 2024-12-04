@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import dill
 import copy
+import logging
 
 __license__ = "LGPL"
 
@@ -115,7 +116,7 @@ class Encode():
         try:
             previous['encoder_filename'] = self.encoder.target_filename
         except AttributeError:
-            pass
+            if os.getenv("EasyVVUQ_Debug"): print('AttributeError raised and ignored')
         return previous
 
     def finished(self):
@@ -209,6 +210,16 @@ class ExecuteLocal():
         self.stdout = stdout
         self.stderr = stderr
 
+        # Fix for the Matlab command, do not split: -r 'test(); quit'
+        # matlab -nodesktop  -nojvm -r 'test(); quit'"
+        if "-r" in self.full_cmd:
+            start = full_cmd.find("-r ")
+            cmd = full_cmd[:start].split()
+            cmd.append(full_cmd[start:])
+            self.full_cmd = cmd
+            logging.info(f"Updating the split of the command for the Matlab's -r argument.")
+            logging.info(f"Full command reads: {cmd}")
+
     def start(self, previous=None):
         target_dir = previous['rundir']
         if isinstance(self.stdout, str):
@@ -222,6 +233,8 @@ class ExecuteLocal():
         self.ret = subprocess.run(
             self.full_cmd, cwd=target_dir,
             stdout=stdout, stderr=stderr)
+        if isinstance(self.stdout, str): close(stdout)
+        if isinstance(self.stderr, str): close(stderr)
         return previous
 
     def finished(self):
@@ -230,6 +243,8 @@ class ExecuteLocal():
     def finalise(self):
         """Performs clean-up if necessary. In this case it isn't. I think.
         """
+        stdout.close()
+        stderr.close()
         pass
 
     def succeeded(self):
@@ -268,7 +283,7 @@ class Actions():
         for action in self.actions:
             previous = self.wrapper(action, previous)
         self.result = previous
-        assert(self.result['run_id'] == run_id)
+        assert (self.result['run_id'] == run_id)
         return previous
 
     def finished(self):

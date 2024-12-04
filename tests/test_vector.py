@@ -1,13 +1,8 @@
 import easyvvuq as uq
 import chaospy as cp
 import os
-import sys
-import pytest
 import logging
 from pprint import pformat, pprint
-from .gauss.encoder_gauss import GaussEncoder
-from .gauss.decoder_gauss import GaussDecoder
-from easyvvuq.decoders.json import JSONDecoder
 from easyvvuq.actions import Actions, Encode, Decode, CreateRunDirectory
 
 __copyright__ = """
@@ -88,7 +83,7 @@ def test_gauss_vector_sc(tmpdir):
     data = my_campaign.get_collation_result()
     analysis = uq.analysis.SCAnalysis(sampler=sampler, qoi_cols=["numbers"])
     my_campaign.apply_analysis(analysis)
-    results = my_campaign.get_last_analysis()
+    my_campaign.get_last_analysis()
 
 
 def test_gauss_vector_pce(tmpdir):
@@ -126,7 +121,7 @@ def test_gauss_vector_pce(tmpdir):
 
     encoder = uq.encoders.GenericEncoder(template_fname='tests/gauss/gauss.template',
                                          target_filename='gauss_in.json')
-    #decoder = JSONDecoder(target_filename='output.csv.json', output_columns=['numbers'])
+    # decoder = JSONDecoder(target_filename='output.csv.json', output_columns=['numbers'])
     decoder = uq.decoders.SimpleCSV(target_filename="output.csv",
                                     output_columns=["numbers"])
     execute = uq.actions.ExecuteLocal(os.path.abspath(

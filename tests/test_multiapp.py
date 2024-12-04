@@ -2,7 +2,6 @@ import easyvvuq as uq
 from easyvvuq.actions import Actions, Encode, Decode, CreateRunDirectory
 import chaospy as cp
 import os
-import sys
 import pytest
 
 __copyright__ = """
@@ -185,7 +184,7 @@ def test_multiapp(tmpdir):
 
     cooling_df = campaign.get_collation_result
 
-    assert(not cannonsim_df.equals(cooling_df))
+    assert (not cannonsim_df.equals(cooling_df))
 
 
 if __name__ == "__main__":
