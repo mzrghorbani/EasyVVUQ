@@ -140,4 +140,4 @@ Detailed information on the Analysis modules is available :doc:`here <_autodoc/e
 Execution
 ---------
 
-Some more information on the use of QCG-Pilothob can be found :doc:`here <QCG-PilotJob-EasyVVUQ>`.
+Some more information on the use of QCG-PilotJob can be found :doc:`here <QCG-PilotJob-EasyVVUQ>`.
