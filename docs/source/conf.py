@@ -62,8 +62,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 #
 html_favicon = '../images/favicon.ico'
-
-# html_theme = 'sphinx-rtd-theme'   
+  
 html_theme = 'sphinx_rtd_theme'
 
 html_sidebars = {
