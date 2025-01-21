@@ -1242,6 +1242,11 @@ class SCAnalysis(BaseAnalysisElement):
         elif typ == 'all':
             # all indices u
             P = list(powerset(U))
+        else:
+            logging.debug('Specified Sobol Index type %s not recognized' % typ)
+            logging.debug('Accepted are first_order or all')
+            import sys
+            sys.exit()
 
         # get first two moments
         mu, D = self.get_moments(qoi)
