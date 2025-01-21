@@ -42,11 +42,12 @@ class SCAnalysisResults(AnalysisResults):
     def _get_sobols_first(self, qoi, input_):
         raw_dict = AnalysisResults._keys_to_tuples(self.raw_data['sobols_first'])
         result = raw_dict[AnalysisResults._to_tuple(qoi)][input_]
-        try:
-            # return np.array([float(result)])
-            return np.array([result[0]])
-        except TypeError:
-            return np.array(result)
+        return np.array(result)
+        # try:
+        #     # return np.array([float(result)])
+        #     return np.array([result[0]])
+        # except TypeError:
+        #     return np.array(result)
 
     def supported_stats(self):
         """Types of statistics supported by the describe method.
