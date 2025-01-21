@@ -27,7 +27,8 @@ jobs:
     - name: Check package
       run: python -m twine check dist/*
     - name: Build and publish
-      # Specifying a GitHub environment is optional, but strongly encouraged
+      run: |
+        twine upload dist/*
       environment: release
       permissions:
         # IMPORTANT: this permission is mandatory for Trusted Publishing
