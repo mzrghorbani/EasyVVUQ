@@ -78,23 +78,82 @@ To upgrade the library use:
 ```
 pip install easyvvuq --upgrade
 ```
+### Developer installation from the repository via bash script - recommended for developers
 
-### Manual installation from repository
+Alternatively, you can manually install EasyVVUQ. Note: As above, you need to be sure you are installing for Python 3 - if necessary replace `pip` with `pip3` and `python` with `python3` in the commands below.
 
-Alternatively, you can manually install EasyVVUQ.
-First clone the repository to your computer:
+1. **Clone the repository:**
 ```
 git clone https://github.com/UCL-CCS/EasyVVUQ.git
 ```
-
-Note: As above, you need to be sure you are installing for Python 3 - if necessary replace `pip` with `pip3` and `python` with `python3` in the commands below.
-
+2. **Install with bash script**
 We are trying to keep dependencies at a minimum but a few are inevitable, to install these, install the EasyVVUQ library itself and build a test case use:
 ```
 cd EasyVVUQ/
 
 bash install_EasyVVUQ.sh
 ```
+
+### Manual developer installation from the repository 
+
+1.  **Clone the repository:**
+    ```
+    git clone https://github.com/UCL-CCS/EasyVVUQ.git
+    ```
+
+2.  **Create and activate a virtual environment:**
+   
+    Using a virtual environment isolates EasyVVUQ's dependencies and prevents conflicts with other Python projects.
+
+    ```
+    python3 -m venv /path/to/new/virtual/environment/venv        # Create a virtual environment named 'venv'
+    source /path/to/new/virtual/environment/venv/bin/activate   # Activate the virtual environment (Linux/macOS)
+    venv \path\to\new\virtual\environment\Scripts\activate      # Activate the virtual environment (Windows)
+    ```
+
+    *   The first command creates a directory named `venv` containing the virtual environment. You can use an alternative, more descriptive name. 
+    *   The second command activates the environment. Your terminal prompt will change to indicate the active environment (e.g., `(venv) $`).
+    *   To use EasyVVUQ again in the future, you will need to reactivate the virtual environment using the command above. 
+
+3. **Install requirements from requirements.txt**
+    ```
+    pip install -r requirements.txt
+    ```
+
+4.  **Navigate to the EasyVVUQ directory:**
+
+    ```
+    cd EasyVVUQ
+    ```
+
+5.  **Install EasyVVUQ in editable mode in the virtual environment:**
+
+    ```
+    pip install -e .
+    ```
+    The `-e` flag (editable mode) means any changes you make to the EasyVVUQ source code will be immediately reflected without needing to reinstall.
+
+    To see easyvvuq in the list of the installed modules in the virtual environment
+    ```
+    pip show
+    ```
+6. **Verification:**
+
+    After installation, verify it by opening a Python interpreter within the activated virtual environment:
+    
+    ```
+    python
+    >>> import easyvvuq
+    >>> print(easyvvuq.__version__)  # Check the installed version
+    >>> exit()
+    ```
+
+    You may also want to run the tests in EasyVVUQ/tests
+    ```
+    pytest tests
+    ```
+    
+    If you have followed the instructions, but are still having issues installing EasyVVUQ please open a ticket. 
 
 ## API
 
