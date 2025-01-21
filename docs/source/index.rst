@@ -40,14 +40,9 @@ can be found at https://github.com/UCL-CCS/EasyVVUQ/tree/dev/tests .
 These are often useful in showing how pieces of the software work.
 
 
-.. _toc:
-
-Table of contents
------------------
-
 .. toctree::
+   :caption: Table of contents
    :maxdepth: 2
-   :caption: Contents
 
    installation
    concepts
