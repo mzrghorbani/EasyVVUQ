@@ -782,6 +782,7 @@ class SCAnalysis(BaseAnalysisElement):
             order = range(self.N)
 
         l = np.copy(self.l_norm)[:, order]
+
         import matplotlib as mpl
         import matplotlib.pyplot as plt
 
@@ -792,13 +793,13 @@ class SCAnalysis(BaseAnalysisElement):
         M = np.max(l)
         cmap = plt.get_cmap('Purples', M)
         # plot 'heat map' of refinement
-        plt.imshow(l.T, cmap=cmap, aspect='auto')
+        im = plt.imshow(l.T, cmap=cmap, aspect='auto')
         norm = mpl.colors.Normalize(vmin=0, vmax=M - 1)
         sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
         sm.set_array([])
-        cb = plt.colorbar(sm)
+        cb = plt.colorbar(im)
         # plot the quad order in the middle of the colorbar intervals
-        p = np.linspace(0, M - 1, M + 1)
+        p = np.linspace(1, M, M+1)
         tick_p = 0.5 * (p[1:] + p[0:-1])
         cb.set_ticks(tick_p)
         cb.set_ticklabels(np.arange(M))
