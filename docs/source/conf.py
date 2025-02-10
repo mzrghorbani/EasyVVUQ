@@ -10,9 +10,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../..'))
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath('../..'))
+
+import sphinx_rtd_theme 
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 from sphinx.ext.apidoc import main as apidoc_main
 apidoc_main(["--force", "-o", "./_autodoc", "../../easyvvuq"])
@@ -59,8 +62,8 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # a list of builtin themes.
 #
 html_favicon = '../images/favicon.ico'
-
-html_theme = 'alabaster'   
+  
+html_theme = 'sphinx_rtd_theme'
 
 html_sidebars = {
     '**': [

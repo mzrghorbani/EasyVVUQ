@@ -22,3 +22,4 @@ pep.sh
 env/
 .ipynb_checkpoints/
 easyvvuq/_version.py
+venv/
